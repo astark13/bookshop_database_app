@@ -1,0 +1,5 @@
+pip install pyinstaller
+pyinstaller.exe --onefile --windowed .\frontend.py
+
+	--onefile – creates a single executable file
+	--windowed – prevents a terminal from being displayed on the background
