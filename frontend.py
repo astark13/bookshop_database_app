@@ -14,7 +14,10 @@ Close the program
 
 """
 from tkinter import *
-import backend
+from backend import Database
+
+database=Database("books.db")                 # we create an object, based on the Database class(the class is a blueprint for the object)
+
 # Create an empty Tkinter window
 
 def get_selected_row(event):                  # function is tied to an event
@@ -37,24 +40,24 @@ def get_selected_row(event):                  # function is tied to an event
 def view_command():
     list1.delete(0,END)               # it empties the list before adding the selection;
                                       # in this way you don't have the same selection added in the list when you press the "View all" button multiple times
-    for row in backend.view():        # the new row will be put at the end of the previous row;
+    for row in database.view():        # the new row will be put at the end of the previous row;
         list1.insert(END,row)         # the first row will be first because it has no previous row  
 
 def search_command():
      list1.delete(0,END)
-     for row in backend.search(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()):
+     for row in database.search(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()):
         list1.insert(END,row) 
 
 def add_command(): 
-    backend.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())       
+    database.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())       
     list1.delete(0,END)
     list1.insert(END,(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()))
 
 def delete_command():
-    backend.delete(selected_tuple[0])
+    database.delete(selected_tuple[0])
 
 def update_command():
-    backend.update(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    database.update(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
 
 window=Tk()
 
